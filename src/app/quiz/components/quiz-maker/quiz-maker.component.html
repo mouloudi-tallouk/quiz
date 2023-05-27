@@ -1,29 +1,50 @@
+<mat-progress-bar *ngIf="!showSelection" mode="indeterminate"></mat-progress-bar>
 <div class="container mt-4 text-center">
     <h2 class="mb-4 mr-5 pr-5"> {{title}} </h2>
-    <form [formGroup]="form" (ngSubmit)="onSubmit(form)">
-        <mat-form-field class="form-field-selection" appearance="outline">
-            <mat-label>Select a category</mat-label>
-            <mat-select id="categorySelect" formControlName="categorySelect">
-                <mat-option>Select a category</mat-option>
-                <mat-option *ngFor="let category of categories" [value]="category.id">{{category.name}}</mat-option>
-            </mat-select>
-        </mat-form-field>
+    <div *ngIf="showSelection">
+        <form [formGroup]="categoryForm" (ngSubmit)="onCategorySubmit(categoryForm)">
+            <mat-form-field class="form-field-selection" appearance="outline">
+                <mat-label>Select a category</mat-label>
+                <mat-select id="categorySelect" 
+                    formControlName="categorySelect" 
+                    (selectionChange)="showQuestions = false;"
+                    required>
+                    <mat-option>Select a category</mat-option>
+                    <mat-option *ngFor="let category of categories" [value]="category.id">{{category.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
     
-        <mat-form-field class="form-field-selection ml-3" appearance="outline">
-            <mat-label>Select a difficulty</mat-label>
-            <mat-select id="difficultySelect" formControlName="difficultySelect">
-                <mat-option>Select a difficulty</mat-option>
-                <mat-option *ngFor="let difficulty of difficulties" [value]="difficulty | lowercase">{{difficulty}}</mat-option>
-            </mat-select>
-        </mat-form-field>
-        <button id="createBtn" type="submit" mat-raised-button class="ml-3 mb-1 pt-4 pb-4">Create</button>
-    </form>
-
-    <span *ngFor="let question of questions">
-        <p> {{ question.question | unescape}}</p>
-        
-
-    </span>
-
+            <mat-form-field class="form-field-selection ml-3" appearance="outline">
+                <mat-label>Select a difficulty</mat-label>
+                <mat-select id="difficultySelect" 
+                    formControlName="difficultySelect"
+                    (selectionChange)="showQuestions = false;" 
+                    required>
+                    <mat-option>Select a difficulty</mat-option>
+                    <mat-option *ngFor="let difficulty of difficulties"
+                        [value]="difficulty | lowercase">{{difficulty}}</mat-option>
+                </mat-select>
+            </mat-form-field>
     
+            <button id="createBtn" type="submit" mat-raised-button [disabled]="showQuestions || loading"
+                [class.spinner]="loading" class="ml-3 mb-1 pt-4 pb-4">Create</button>
+        </form>
+    
+        <form [formGroup]="questionsForm" (ngSubmit)="onQuestionsSubmit(questionsForm)">
+            <div *ngIf="showQuestions" class="question-container ">
+                <span *ngFor="let question of questions;let i = index" class="ml-5">
+                    <p> {{ question.question | unescape}}</p>
+                    <mat-chip-listbox #listboxRef (change)="onSelectionChange(listboxRef, i)"
+                        [formControlName]="'answer' + i" required>
+                        <mat-chip-option *ngFor="let answer of question.answers.options;"
+                            [value]="answer">{{answer | unescape}}</mat-chip-option>
+                    </mat-chip-listbox>
+                </span>
+    
+                <button *ngIf="showQuestions && questionsForm.valid"
+                    type="submit" [class.spinner]="loading"
+                    class="form-control btn btn-secondary mt-5 col-11">Submit</button>
+            </div>
+        </form>
+    </div>
 </div>

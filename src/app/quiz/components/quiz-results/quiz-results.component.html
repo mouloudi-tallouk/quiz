@@ -1,1 +1,32 @@
-<p>quiz-results works!</p>
+<div class="container mt-4 text-center">
+    <h2 class="mb-4 mr-5 pr-5"> {{title}} </h2>
+
+    <div class="question-container">
+        <span *ngFor="let result of results;let i = index" class="ml-5">
+            <p> {{ result.question | unescape}}</p>
+
+            <mat-chip-listbox>
+                <mat-chip-option disabled 
+                    *ngFor="let answer of result.answers.options;"
+                    [ngClass]="
+                    (result.correct_answer == answer) ? 'correct-answer': 
+                    ((result.answers.selected_option == result.correct_answer && result.answers.selected_option == answer) ? 'correct-answer' : 
+                    (result.answers.selected_option != result.correct_answer && result.answers.selected_option == answer ? 'incorrect-answer' : ''))" 
+                    [value]="answer">{{answer | unescape}}</mat-chip-option>
+            </mat-chip-listbox>
+
+        </span>
+
+        <p class="mt-5 text-center col-5 result-label-marging" [ngStyle]="{
+            'background-color': (scored === 1 || scored === 0) ? 'red' : 
+                                (scored === 2 || scored === 3) ? 'yellow' :
+                                (scored === 4 || scored === 5) ? 'green' : '',
+            'color': (scored === 4 || scored === 5 || scored === 1 || scored === 0) ? 'white' : ''}">You scored
+            {{scored}} out of 5</p>
+
+        <button routerLink="/quiz-maker" type="button" class="form-control btn btn-secondary mt-5 col-11">Create a new
+            quiz</button>
+    </div>
+
+
+</div>

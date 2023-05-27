@@ -1,4 +1,4 @@
-import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 import { BadInput } from '../errors/bad-input.error';
@@ -15,15 +15,15 @@ export class HttpMethodsService {
   public static handleError(error: HttpErrorResponse) {
     if (error.status === 400) {
       new BadInput().handleError(error);
-      return throwError(error);
+      return throwError(() => error);
     }
 
     if (error.status === 404) {
       new NotFoundError().handleError(error);
-      return throwError(error);
+      return throwError(() => error);
     }
 
     new AppError().handleError(error);
-    return throwError(error);
+    return throwError(() => error);
   }
 }

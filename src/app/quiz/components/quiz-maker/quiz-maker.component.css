@@ -1,5 +1,74 @@
 .form-field-selection {
-    width: 400px;
+  width: 400px;
 }
+
+.question-container {
+  text-align: left !important;
+  margin: 15px 0px 5px 100px;
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner:before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  margin-left: -10px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  border-top-color: #000000;
+  animation: spinner .8s linear infinite;
+}
+
+::ng-deep .mdc-evolution-chip__graphic.mat-mdc-chip-graphic.ng-star-inserted {
+  display: none;
+}
+
+
+.mat-mdc-standard-chip.mat-primary.mat-mdc-chip-selected, .mat-mdc-standard-chip.mat-primary.mat-mdc-chip-highlighted {
+  --mdc-chip-elevated-container-color: #28a745;
+}
+
+.mat-mdc-standard-chip {
+  --mdc-chip-elevated-container-color: #ffffff;
+  --mdc-chip-label-text-color: #28a745;
+}
+
+.mat-mdc-standard-chip:hover {
+  --mdc-chip-elevated-container-color: #28a745;
+  --mdc-chip-label-text-color: #ffffff;
+}
+
+.mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) {
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  border-color: #28a745;
+  padding-left: 0.7rem;
+}
+
+
+
+
 
 

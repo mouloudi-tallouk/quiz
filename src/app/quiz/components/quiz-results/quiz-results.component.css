@@ -1,0 +1,39 @@
+.question-container {
+    text-align: left !important;
+    margin: 15px 0px 5px 100px;
+}
+
+.mat-mdc-standard-chip.mdc-evolution-chip--disabled {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-color: #28a745;
+    border-radius: 0.25rem;
+    opacity: 1;
+    background-color: #ffffff;
+    padding-left: 0.7rem;
+    --mdc-chip-disabled-label-text-color: #28a745;
+}
+
+.correct-answer[disabled] {
+    background-color:#28a745;
+    --mdc-chip-disabled-label-text-color: #ffffff;
+}
+
+.incorrect-answer[disabled] {
+    background-color: red;
+    --mdc-chip-disabled-label-text-color: #ffffff;
+}
+
+.result-label-marging {
+    margin-left: 25%;
+}

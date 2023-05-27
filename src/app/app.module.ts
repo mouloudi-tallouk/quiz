@@ -10,7 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { QuizService } from './quiz/services/quiz-maker.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { QuizResultsComponent } from './quiz/components/quiz-results/quiz-results.component';
-import { UnEscapePipe } from './shared/pipes/safe-value.pipe';
+import { UnEscapePipe } from './shared/pipes/unescape.pipe';
 
 @NgModule({
   declarations: [

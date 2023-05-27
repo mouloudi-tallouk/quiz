@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { BehaviorSubject, catchError, map } from 'rxjs';
 import { HttpMethodsService } from 'src/app/shared/services/http-methods.service';
@@ -24,7 +24,7 @@ export class QuizService {
   getCategories() {
     return this.http.get<TriviaCategories>(categories).pipe(
       map((response) => response.trivia_categories),
-      catchError(HttpMethodsService.handleError)
+      catchError((error: HttpErrorResponse) => HttpMethodsService.handleError(error))
     );
   }
 
@@ -39,13 +39,11 @@ export class QuizService {
       "&difficulty=" + request.difficultySelect)
     .pipe(
       map((response) => response.results),
-      catchError(HttpMethodsService.handleError)
+      catchError((error: HttpErrorResponse) => HttpMethodsService.handleError(error))
     );
   }
 
   changeData(data : Result[]) {
     this.quizResultSubject.next(data);
   }
-
-
 }

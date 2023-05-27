@@ -2,6 +2,6 @@ export const environment = {
     production: false,
     appTitle: 'Quiz',
     api: {
-        endpoint: ''
+        endpoint: 'https://opentdb.com'
     }
 };
